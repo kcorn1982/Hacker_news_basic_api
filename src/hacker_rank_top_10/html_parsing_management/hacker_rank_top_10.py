@@ -1,4 +1,3 @@
-from src.http_management.http_request_manager import HttpRequestManager
 from bs4 import BeautifulSoup
 
 class HackerRankNewsParser():
@@ -22,15 +21,10 @@ class HackerRankNewsParser():
     def _generate_data_dict_values_from_top_10_news(self):
         top_10_news_data = []
         for item in self._raw_top_ten_news_items():
-            top_10_news_data.append({"story": item.find('a', {"class": "storylink"}).text,
-                                     "link": item.find('a', {"class": "storylink"}).attrs['href']})
+            top_10_news_data.append({"story": item.find('a', {"class": "titlelink"}).text,
+                                     "link": item.find('a', {"class": "titlelink"}).attrs['href']})
 
         return top_10_news_data
 
     def generate_top_10(self):
         return dict(zip(self._generate_keys_from_top_10_news(), self._generate_data_dict_values_from_top_10_news()))
-
-
-
-if __name__ == '__main__':
-    print(HackerRankNewsParser().generate_top_10())
