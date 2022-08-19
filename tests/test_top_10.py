@@ -4,8 +4,6 @@ client = app.test_client()
 hacker_news_response = client.get("/hacker-news-top-10")
 hacker_news_json_response = hacker_news_response.get_json()
 
-print(len(hacker_news_json_response))
-
 
 def test_response_successful():
     assert hacker_news_response.status_code == 200
